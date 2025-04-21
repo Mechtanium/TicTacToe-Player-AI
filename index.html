@@ -341,21 +341,6 @@
             reveal_time_bound_question(items, data, 0);
         }
         
-
-        function init() {
-            let changelog = true;
-            submitted = false;
-            window.onmessage = (event) => {
-                if(event.data) {
-                    console.log("Message received: ", event);
-                    origin = event.origin;
-                    addLayout(event.data, changelog);
-                }
-            }
-
-            // window.parent.postMessage(test_data, window.location.origin);
-        }
-        
         function handleFormSubmit() {
             if(!submitted) {
                 const submit_button = document.getElementById("submit-button");
@@ -551,6 +536,22 @@
     "ideal_response": "Opportunity crudes are non-conventional crude oils that often present unique challenges due to their diverse properties, such as high sulfur content, high acidity, or high metal concentrations. These crudes require specific processing techniques and infrastructure modifications to be refined effectively. The challenges include increased operational costs, the need for advanced technology, and potential environmental issues related to processing byproducts. Despite these challenges, opportunity crudes are valuable for diversifying supply sources and enhancing energy security."
   }
 ];
+
+        function init() {
+            let changelog = true;
+            submitted = false;
+            console.log(test_data);
+            addLayout(test_data, changelog);
+            window.onmessage = (event) => {
+                // if(event.data) {
+                //     console.log("Message received: ", event);
+                //     origin = event.origin;
+                //     addLayout(event.data, changelog);
+                // }
+            }
+
+            // window.parent.postMessage(test_data, window.location.origin);
+        }
     </script>
 </body>
 
