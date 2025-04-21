@@ -174,52 +174,51 @@
     </div>
 
     <script type="text/javascript">
-        let visibilitychangewarning = false;
-        let blurchangewarning = false;
-        function disable_interaction(query, input){
-            query.oncopy = (e) => e.preventDefault();
-            query.oncut = (e) => e.preventDefault();
-            query.ondragstart = (e) => e.preventDefault();
-            query.ondragover = (e) => e.preventDefault();
-            input.oncopy = (e) => e.preventDefault();
-            input.oncut = (e) => e.preventDefault();
-            input.onpaste = (e) => e.preventDefault();
-            input.ondragstart = (e) => e.preventDefault();
-            input.ondragover = (e) => e.preventDefault();
-        }
-
-        function showCustomAlert(message, confirm_action, cancel_action) {
-            document.getElementById('alertMessage').innerText = message;
-            document.getElementById('customAlertOverlay').style.display = 'flex';
-
-            const confirm = document.getElementById("confirm");
-            const cancel = document.getElementById("cancel");
-
-            confirm.onclick = (e) => confirm_action();
-            cancel.onclick = (e) => cancel_action();
-        }
+        
 
 
-        let origin = "https://enosmath.wixstudio.io/assess";
-        const container = document.querySelector("#container");
-        const template = document.querySelector("#item-template");
+        let origin = "https://sapiensng.wixstudio.com/assess-ai-grader";
         let submitted;
-        const items = document.querySelectorAll(".form-row");
-
-
-        // Disable non-essential user interaction to reduce cheating
-        items.forEach((item) => {
-            const input = item.querySelector(".form-input");
-            const query = item.querySelector(".form-label");
-
-            disable_interaction(query, input);
-        });
-
-
-        const log = (value) => console.log(value);
-
+        
+        const log = (...value) => console.log(...value);
 
         const addLayout = (data, changelog) => {
+            let visibilitychangewarning = false;
+            let blurchangewarning = false;
+            function disable_interaction(query, input){
+                query.oncopy = (e) => e.preventDefault();
+                query.oncut = (e) => e.preventDefault();
+                query.ondragstart = (e) => e.preventDefault();
+                query.ondragover = (e) => e.preventDefault();
+                input.oncopy = (e) => e.preventDefault();
+                input.oncut = (e) => e.preventDefault();
+                input.onpaste = (e) => e.preventDefault();
+                input.ondragstart = (e) => e.preventDefault();
+                input.ondragover = (e) => e.preventDefault();
+            }
+
+            function showCustomAlert(message, confirm_action, cancel_action) {
+                document.getElementById('alertMessage').innerText = message;
+                document.getElementById('customAlertOverlay').style.display = 'flex';
+
+                const confirm = document.getElementById("confirm");
+                const cancel = document.getElementById("cancel");
+
+                confirm.onclick = (e) => confirm_action();
+                cancel.onclick = (e) => cancel_action();
+            }
+
+            const container = document.querySelector("#container");
+            const template = document.querySelector("#item-template");
+
+            // Disable non-essential user interaction to reduce cheating
+            items.forEach((item) => {
+                const input = item.querySelector(".form-input");
+                const query = item.querySelector(".form-label");
+
+                disable_interaction(query, input);
+            });
+
             data.forEach((item, idx, val) => {
 
                 const clone = template.content.cloneNode(true);
