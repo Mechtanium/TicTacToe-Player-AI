@@ -207,9 +207,10 @@
                 confirm.onclick = (e) => confirm_action();
                 cancel.onclick = (e) => cancel_action();
             }
-
+            
             const container = document.querySelector("#container");
             const template = document.querySelector("#item-template");
+            let items = document.querySelectorAll(".form-row");
 
             // Disable non-essential user interaction to reduce cheating
             items.forEach((item) => {
@@ -336,7 +337,7 @@
                 }
             }
 
-            const items = container.querySelectorAll(".form-row");
+            items = container.querySelectorAll(".form-row");
             reveal_time_bound_question(items, data, 0);
         }
         
