@@ -224,6 +224,8 @@
             });
 
             window.addEventListener("resize", (event) => {
+                console.log("RESIZED");
+                
                 const newHeight = window.innerHeight;
                 const newWidth = window.innerWidth;
 
@@ -555,7 +557,7 @@
             let changelog = true;
             submitted = false;
             // TEST LINES
-            console.log("v1.0.8");
+            console.log("v1.0.9");
             // addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 if(event.data) {
