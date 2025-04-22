@@ -224,7 +224,6 @@
             });
 
             window.addEventListener("resize", (event) => {
-                console.log("RESIZED");
                 
                 const newHeight = window.innerHeight;
                 const newWidth = window.innerWidth;
@@ -239,7 +238,6 @@
                 } else if ((heightDiff == 0 && widthDiff == 0) || (Math.abs(heightDiff) < 100 && widthDiff == 0)) {
                     console.log("Likely virtual keyboard pop-up");
                 } else {
-                    console.log("Tester: LH: ", lastHeight, " NH: ", newHeight, "LW: ", lastWidth, " NW: ", newWidth)
                     alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
                     handleFormSubmit("RESIZE");
                 }
@@ -305,9 +303,6 @@
                     const timer = divObj.querySelector(".timer-input");
                     const time = Math.floor((data_list[index].dur_millis || 180000) / 1000);
                     let counter = 0;
-
-                    const outerHeight = window.outerHeight;
-                    log(outerHeight);
                     if (changelog) {
                         changelog = false;
                     }
@@ -381,7 +376,7 @@
                 data.email = document.getElementById("email").value;
                 data.responses = datalist;
             
-                console.log(data);
+                // console.log(data);
 
                 window.parent.postMessage(data, origin)
             }
@@ -557,11 +552,10 @@
             let changelog = true;
             submitted = false;
             // TEST LINES
-            console.log("v1.0.11");
+            // console.log("v1.0.11");
             // addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 if(event.data) {
-                    console.log("Message received: ", event);
                     origin = event.origin;
                     addLayout(event.data, changelog);
                 }
