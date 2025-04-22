@@ -160,7 +160,7 @@
             <input class="form-input" type="email" id="email" name="email">
         </div>
         <div id="container" class="container"></div>
-        <button class="submit-button" onclick="handleFormSubmit()" id="submit-button">Submit all</button>
+        <button class="submit-button" onclick="handleFormSubmit('COMPLETE')" id="submit-button">Submit all</button>
     </div>
 
     <div class="overlay" id="customAlertOverlay">
@@ -185,8 +185,9 @@
         const log = (...value) => console.log(...value);
 
         const addLayout = (data, changelog) => {
-            let visibilitychangewarning = false;
-            let blurchangewarning = false;
+            let visibilitychangewarning = 0;
+            let resizewarning = false;
+            // let blurchangewarning = false;
             function disable_interaction(query, input){
                 query.oncopy = (e) => e.preventDefault();
                 query.oncut = (e) => e.preventDefault();
@@ -223,8 +224,6 @@
             });
 
             window.addEventListener("resize", (event) => {
-                log("This is resize", event);
-                // handleFormSubmit();
                 const newHeight = window.innerHeight;
                 const newWidth = window.innerWidth;
 
@@ -232,14 +231,14 @@
                 const widthDiff = newWidth - lastWidth;
 
                 if ((widthDiff > 0 && heightDiff < 0) || (widthDiff < 0 && heightDiff > 0)) {
-                    console.log("Likely screen rotation", ", LH: ", lastHeight, ", NH: ", newHeight, ", LW: ", lastWidth, ", NW: ", newWidth);
+                    console.log("Likely screen rotation");
                 // } else if (heightDiff > 100 && widthDiff < 50) {
                 //     console.log("Likely split screen");
                 } else if (heightDiff == 0 && widthDiff == 0) {
                     console.log("Likely virtual keyboard pop-up");
                 } else {
-                    alert("Final warning, do not leave this page or your test will be terminated.")
-                    console.log("Unknown resize cause", ", LH: ", lastHeight, ", NH: ", newHeight, ", LW: ", lastWidth, ", NW: ", newWidth);
+                    alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
+                    handleFormSubmit("RESIZE");
                 }
 
                 lastHeight = newHeight;
@@ -247,32 +246,29 @@
             });
 
             window.addEventListener( "visibilitychange", (event) => {
-                log("This is visibility change", window);
-                if (window.visibilityState == "visible") {
-                    log("This is visible", event);
-                    if (!visibilitychangewarning) {
-                        log("This is visibility warning", event);
-                        visibilitychangewarning = true;
-                        alert("Final warning, do not leave this page or your test will be terminated.")
-                    } else {
-                        handleFormSubmit();
-                    }
+                visibilitychangewarning += 1;
+                if (visibilitychangewarning < 3) {
+                    log("This is visibility warning", visibilitychangewarning);
+                    if (visibilitychangewarning == 2) alert("Final warning, do not leave this page or your test will be terminated.")
+                } else {
+                    alert("You have attempted to leave this screen multiple times. Your test will now be terminated.")
+                    handleFormSubmit("SCREEN_EXIT");
                 }
             });
 
-            window.addEventListener('blur', (event) => {
-                log("This is blur change", window);
-                if (window.visibilityState == "visible") {
-                    log("This is blur but visible", event);
-                    if (!blurchangewarning) {
-                        log("This is blur change warning", event);
-                        blurchangewarning = true;
-                        alert("Final warning, do not leave this page or your test will be terminated.")
-                    } else {
-                        handleFormSubmit();
-                    }
-                }
-            });
+            // window.addEventListener('blur', (event) => {
+            //     log("This is blur change", window);
+            //     if (window.visibilityState == "visible") {
+            //         log("This is blur but visible", event);
+            //         if (!blurchangewarning) {
+            //             log("This is blur change warning", event);
+            //             blurchangewarning = true;
+            //             alert("Final warning, do not leave this page or your test will be terminated.")
+            //         } else {
+            //             handleFormSubmit();
+            //         }
+            //     }
+            // });
 
             data.forEach((item, idx, val) => {
 
@@ -294,17 +290,6 @@
                     container.appendChild(clone);
                 }
             });
-
-            let up = true;
-            function the_sun() {
-                if (up) {
-                    up = false;
-                    return "Upright";
-                } else {
-                    up = true;
-                    return "Bedtime";
-                }
-            }
 
             const padZero = (num) => num.toString().padStart(2, '0');
 
@@ -369,12 +354,12 @@
             reveal_time_bound_question(items, data, 0);
         }
         
-        function handleFormSubmit() {
+        function handleFormSubmit(reason) {
             if(!submitted) {
                 const submit_button = document.getElementById("submit-button");
                 submit_button.classList.add(".submit-button.disabled");
                 submitted = true;
-                let data = {};
+                let data = {"reason": reason};
 
                 const items = container.querySelectorAll(".form-row");
                 let datalist = [];
@@ -568,7 +553,7 @@
         function init() {
             let changelog = true;
             submitted = false;
-            console.log("v1.0.6");
+            console.log("v1.0.7");
             addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 // if(event.data) {
