@@ -231,7 +231,7 @@
                 const heightDiff = newHeight - lastHeight;
                 const widthDiff = newWidth - lastWidth;
 
-                if (widthDiff > 0 && heightDiff < 0) {
+                if ((widthDiff > 0 && heightDiff < 0) || (widthDiff < 0 && heightDiff > 0)) {
                     console.log("Likely screen rotation", ", LH: ", lastHeight, ", NH: ", newHeight, ", LW: ", lastWidth, ", NW: ", newWidth);
                 // } else if (heightDiff > 100 && widthDiff < 50) {
                 //     console.log("Likely split screen");
@@ -568,7 +568,7 @@
         function init() {
             let changelog = true;
             submitted = false;
-            console.log("v1.0.5");
+            console.log("v1.0.6");
             addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 // if(event.data) {
