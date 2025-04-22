@@ -226,7 +226,6 @@
             });
 
             window.addEventListener( "visibilitychange", (event) => {
-                log("This is visibility change", event);
                 if (window.visibilityState == "visible") {
                     log("This is visible", event);
                     if (!visibilitychangewarning) {
@@ -240,7 +239,6 @@
             });
 
             window.addEventListener('blur', (event) => {
-                log("This is blur change", event);
                 if (window.visibilityState == "visible") {
                     log("This is blur but visible", event);
                     if (!blurchangewarning) {
