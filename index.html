@@ -221,6 +221,7 @@
             });
 
             window.addEventListener("resize", (event) => {
+                log("This is resize", event);
                 handleFormSubmit();
             });
 
@@ -299,7 +300,7 @@
                     }
 
                     const interval = setInterval(() => {
-                        if (outerHeight != window.outerHeight) log("Changed");//handleFormSubmit();
+                        // if (outerHeight != window.outerHeight) log("Changed");//handleFormSubmit();
                     
                         if (counter < time) {
                             counter++;
