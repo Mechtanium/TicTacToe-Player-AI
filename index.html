@@ -220,6 +220,34 @@
                 disable_interaction(query, input);
             });
 
+            window.addEventListener("resize", (event) => {
+                handleFormSubmit();
+            });
+
+            window.addEventListener( "visibilitychange", (event) => {
+                log("This is visibility change", event);
+                if (window.visibilityState == "visible") {
+                    if (!visibilitychangewarning) {
+                        visibilitychangewarning = true;
+                        alert("Final warning, do not leave this page or your test will be terminated.")
+                    } else {
+                        handleFormSubmit();
+                    }
+                }
+            });
+
+            window.addEventListener('blur', (event) => {
+                log("This is blur change", event);
+                if (window.visibilityState == "visible") {
+                    if (!blurchangewarning) {
+                        blurchangewarning = true;
+                        alert("Final warning, do not leave this page or your test will be terminated.")
+                    } else {
+                        handleFormSubmit();
+                    }
+                }
+            });
+
             data.forEach((item, idx, val) => {
 
                 const clone = template.content.cloneNode(true);
@@ -234,34 +262,6 @@
                 else{
                     title.textContent = `${idx + 1}) ${item.query}`;
                     disable_interaction(title, response);
-
-                    window.addEventListener("resize", (event) => {
-                        handleFormSubmit();
-                    });
-
-                    window.addEventListener( "visibilitychange", (event) => {
-                        log("This is visibility change", event);
-                        if (window.visibilityState == "visible") {
-                            if (!visibilitychangewarning) {
-                                visibilitychangewarning = true;
-                                alert("Final warning, do not leave this page or your test will be terminated.")
-                            } else {
-                                handleFormSubmit();
-                            }
-                        }
-                    });
-
-                    window.addEventListener('blur', (event) => {
-                        log("This is blur change", event);
-                        if (window.visibilityState == "visible") {
-                            if (!blurchangewarning) {
-                                blurchangewarning = true;
-                                alert("Final warning, do not leave this page or your test will be terminated.")
-                            } else {
-                                handleFormSubmit();
-                            }
-                        }
-                    });
 
                     div.classList.add("hidden");
 
