@@ -222,7 +222,23 @@
 
             window.addEventListener("resize", (event) => {
                 log("This is resize", event);
-                handleFormSubmit();
+                // handleFormSubmit();
+                const newHeight = window.innerHeight;
+                const newWidth = window.innerWidth;
+
+                const heightDiff = Math.abs(newHeight - lastHeight);
+                const widthDiff = Math.abs(newWidth - lastWidth);
+
+                if (widthDiff > 100 && heightDiff > 100) {
+                    console.log("Likely screen rotation");
+                } else if (heightDiff > 100 && widthDiff < 50) {
+                    console.log("Likely virtual keyboard pop-up");
+                } else {
+                    console.log("Unknown resize cause");
+                }
+
+                lastHeight = newHeight;
+                lastWidth = newWidth;
             });
 
             window.addEventListener( "visibilitychange", (event) => {
