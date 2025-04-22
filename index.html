@@ -240,7 +240,8 @@
                     });
 
                     window.addEventListener( "visibilitychange", (event) => {
-                        if (window.visibilityState === "visible") {
+                        log("This is visibility change", event);
+                        if (window.visibilityState == "visible") {
                             if (!visibilitychangewarning) {
                                 visibilitychangewarning = true;
                                 alert("Final warning, do not leave this page or your test will be terminated.")
@@ -250,8 +251,9 @@
                         }
                     });
 
-                    window.addEventListener('blur', function(event) {
-                        if (window.visibilityState === "visible") {
+                    window.addEventListener('blur', (event) => {
+                        log("This is blur change", event);
+                        if (window.visibilityState == "visible") {
                             if (!blurchangewarning) {
                                 blurchangewarning = true;
                                 alert("Final warning, do not leave this page or your test will be terminated.")
