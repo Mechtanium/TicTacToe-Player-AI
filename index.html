@@ -228,7 +228,9 @@
             window.addEventListener( "visibilitychange", (event) => {
                 log("This is visibility change", event);
                 if (window.visibilityState == "visible") {
+                    log("This is visible", event);
                     if (!visibilitychangewarning) {
+                        log("This is visibility warning", event);
                         visibilitychangewarning = true;
                         alert("Final warning, do not leave this page or your test will be terminated.")
                     } else {
@@ -240,7 +242,9 @@
             window.addEventListener('blur', (event) => {
                 log("This is blur change", event);
                 if (window.visibilityState == "visible") {
+                    log("This is blur but visible", event);
                     if (!blurchangewarning) {
+                        log("This is blur change warning", event);
                         blurchangewarning = true;
                         alert("Final warning, do not leave this page or your test will be terminated.")
                     } else {
