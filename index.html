@@ -553,14 +553,15 @@
         function init() {
             let changelog = true;
             submitted = false;
-            console.log("v1.0.7");
-            addLayout(test_data, changelog);
+            // TEST LINES
+            // console.log("v1.0.7");
+            // addLayout(test_data, changelog);
             window.onmessage = (event) => {
-                // if(event.data) {
-                //     console.log("Message received: ", event);
-                //     origin = event.origin;
-                //     addLayout(event.data, changelog);
-                // }
+                if(event.data) {
+                    console.log("Message received: ", event);
+                    origin = event.origin;
+                    addLayout(event.data, changelog);
+                }
             }
 
             // window.parent.postMessage(test_data, window.location.origin);
