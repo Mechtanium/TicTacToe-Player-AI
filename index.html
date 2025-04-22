@@ -237,8 +237,9 @@
                 } else if (heightDiff == 0 && widthDiff == 0) {
                     console.log("Likely virtual keyboard pop-up");
                 } else {
-                    alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
-                    handleFormSubmit("RESIZE");
+                    console.log("Tester: LH: ", lastHeight, " NH: ", newHeight, "LW: ", lastWidth, " NW: ", newWidth)
+                    // alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
+                    // handleFormSubmit("RESIZE");
                 }
 
                 lastHeight = newHeight;
@@ -554,7 +555,7 @@
             let changelog = true;
             submitted = false;
             // TEST LINES
-            // console.log("v1.0.7");
+            console.log("v1.0.8");
             // addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 if(event.data) {
