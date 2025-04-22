@@ -240,8 +240,8 @@
                     console.log("Likely virtual keyboard pop-up");
                 } else {
                     console.log("Tester: LH: ", lastHeight, " NH: ", newHeight, "LW: ", lastWidth, " NW: ", newWidth)
-                    // alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
-                    // handleFormSubmit("RESIZE");
+                    alert("You have attempted to minimize or split the screen. Your test will now be terminated.")
+                    handleFormSubmit("RESIZE");
                 }
 
                 lastHeight = newHeight;
@@ -557,7 +557,7 @@
             let changelog = true;
             submitted = false;
             // TEST LINES
-            console.log("v1.0.9");
+            console.log("v1.0.10");
             // addLayout(test_data, changelog);
             window.onmessage = (event) => {
                 if(event.data) {
