@@ -218,9 +218,9 @@
             // Disable non-essential user interaction to reduce cheating
             items.forEach((item) => {
                 const input = item.querySelector(".form-input");
-                const query = item.querySelector(".form-label");
+                const title = item.querySelector(".form-label");
 
-                disable_interaction(query, input);
+                disable_interaction(title, input);
             });
 
             window.addEventListener("resize", (event) => {
@@ -256,20 +256,6 @@
                     handleFormSubmit("SCREEN_EXIT");
                 }
             });
-
-            // window.addEventListener('blur', (event) => {
-            //     log("This is blur change", window);
-            //     if (window.visibilityState == "visible") {
-            //         log("This is blur but visible", event);
-            //         if (!blurchangewarning) {
-            //             log("This is blur change warning", event);
-            //             blurchangewarning = true;
-            //             alert("Final warning, do not leave this page or your test will be terminated.")
-            //         } else {
-            //             handleFormSubmit();
-            //         }
-            //     }
-            // });
 
             data.forEach((item, idx, val) => {
 
