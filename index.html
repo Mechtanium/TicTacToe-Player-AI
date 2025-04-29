@@ -174,21 +174,21 @@
     </div>
 
     <script type="text/javascript">
-        
+
 
 
         let origin = "https://sapiensng.wixstudio.com/assess-ai-grader";
         let submitted;
         let lastHeight = window.innerHeight;
         let lastWidth = window.innerWidth;
-        
+
         const log = (...value) => console.log(...value);
 
         const addLayout = (data, changelog) => {
             let visibilitychangewarning = 0;
             let resizewarning = false;
             // let blurchangewarning = false;
-            function disable_interaction(query, input){
+            function disable_interaction(query, input) {
                 query.oncopy = (e) => e.preventDefault();
                 query.oncut = (e) => e.preventDefault();
                 query.ondragstart = (e) => e.preventDefault();
@@ -210,7 +210,7 @@
                 confirm.onclick = (e) => confirm_action();
                 cancel.onclick = (e) => cancel_action();
             }
-            
+
             const container = document.querySelector("#container");
             const template = document.querySelector("#item-template");
             let items = document.querySelectorAll(".form-row");
@@ -224,7 +224,7 @@
             });
 
             window.addEventListener("resize", (event) => {
-                
+
                 const newHeight = window.innerHeight;
                 const newWidth = window.innerWidth;
 
@@ -233,8 +233,8 @@
 
                 if ((widthDiff > 0 && heightDiff < 0) || (widthDiff < 0 && heightDiff > 0)) {
                     console.log("Likely screen rotation");
-                // } else if (heightDiff > 100 && widthDiff < 50) {
-                //     console.log("Likely split screen");
+                    // } else if (heightDiff > 100 && widthDiff < 50) {
+                    //     console.log("Likely split screen");
                 } else if ((heightDiff == 0 && widthDiff == 0) || (Math.abs(heightDiff) < 100 && widthDiff == 0)) {
                     console.log("Likely virtual keyboard pop-up");
                 } else {
@@ -246,7 +246,7 @@
                 lastWidth = newWidth;
             });
 
-            window.addEventListener( "visibilitychange", (event) => {
+            window.addEventListener("visibilitychange", (event) => {
                 visibilitychangewarning += 1;
                 if (visibilitychangewarning < 3) {
                     log("This is visibility warning", visibilitychangewarning);
@@ -281,8 +281,8 @@
                 div.id = item._id;
                 response.value = "";
 
-                if(!title || !response) console.log("Null fields");
-                else{
+                if (!title || !response) console.log("Null fields");
+                else {
                     title.textContent = `${idx + 1}) ${item.query}`;
                     disable_interaction(title, response);
 
@@ -309,7 +309,7 @@
 
                     const interval = setInterval(() => {
                         // if (outerHeight != window.outerHeight) log("Changed");//handleFormSubmit();
-                    
+
                         if (counter < time) {
                             counter++;
                             const remaining = time - counter;
@@ -322,7 +322,7 @@
                         }
                     }, 1000);
 
-                    divObj.querySelector(".right-arrow-icon").addEventListener('click', function() {
+                    divObj.querySelector(".right-arrow-icon").addEventListener('click', function () {
                         showCustomAlert("You're about to leave this question and move on to the next. If you do so now you will not be able to return to edit this question later. \n\nAre you sure you want to proceed?", confirmAction, cancelAction)
                     });
 
@@ -351,13 +351,13 @@
             items = container.querySelectorAll(".form-row");
             reveal_time_bound_question(items, data, 0);
         }
-        
+
         function handleFormSubmit(reason) {
-            if(!submitted) {
+            if (!submitted) {
                 const submit_button = document.getElementById("submit-button");
                 submit_button.classList.add(".submit-button.disabled");
                 submitted = true;
-                let data = {"reason": reason};
+                let data = { "reason": reason };
 
                 const items = container.querySelectorAll(".form-row");
                 let datalist = [];
@@ -375,7 +375,7 @@
                 data.matno = document.getElementById("matno").value;
                 data.email = document.getElementById("email").value;
                 data.responses = datalist;
-            
+
                 // console.log(data);
 
                 window.parent.postMessage(data, origin)
@@ -383,170 +383,170 @@
         }
 
         const test_data = [
-  {
-    "_id": "205f8950-004b-4d1a-b635-8e6017959b49",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:39:28 GMT+0100 (West Africa Standard Time)",
-    "query": "What are the primary factors involved in the formation of crude oil according to the biogenic theory?",
-    "_updatedDate": "Sat May 25 2024 14:39:28 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Diagenesis, catagenesis, and metagenesis processes",
-      "Transformed into hydrocarbons over millions of years",
-      "Increasing depth, temperature, and pressure",
-      "Buried under layers of sediment",
-      "Remains of ancient marine organisms"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "The biogenic theory of crude oil formation posits that crude oil is formed from the remains of ancient marine organisms. These organisms, upon dying, settled on the seabed, becoming buried under layers of sediment. Over millions of years, with increasing depth, temperature, and pressure, these organic materials transformed into hydrocarbons. The process involves diagenesis (initial breakdown), catagenesis (thermal degradation), and metagenesis (formation of hydrocarbons)."
-  },
-  {
-    "_id": "6a4621da-7d8b-4aec-bacd-ce19e5d29e0a",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:41:00 GMT+0100 (West Africa Standard Time)",
-    "query": "Describe the role of reservoir rocks in the accumulation of crude oil.",
-    "_updatedDate": "Sat May 25 2024 14:41:00 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "High porosity and high permeability",
-      "Encounters an impermeable barrier",
-      "Migrates from source rock to reservoir rock",
-      "Interconnected pores allow oil movement",
-      "Porous and permeable medium for oil storage"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Reservoir rocks play a crucial role in the accumulation of crude oil by providing the porous and permeable medium necessary for oil storage and migration. These rocks have interconnected pores that allow oil to move through them. The oil migrates from the source rock into the reservoir rock until it encounters an impermeable barrier, such as a cap rock, where it accumulates. Key properties of reservoir rocks include high porosity, which allows for the storage of large volumes of oil, and high permeability, which enables the movement of oil through the rock."
-  },
-  {
-    "_id": "43bd5ebe-1412-4618-b688-13e99f578d56",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:44:43 GMT+0100 (West Africa Standard Time)",
-    "query": "Explain the significance of API gravity in classifying crude oil.",
-    "_updatedDate": "Sat May 25 2024 14:44:43 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Lower API gravity means heavier oil requiring complex refining",
-      "Yields more gasoline and lighter products",
-      "Higher API gravity means lighter and more valuable oil",
-      "Indicates oil's density, quality, and value",
-      "Measure of petroleum liquid density compared to water"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "API gravity is a measure of how heavy or light a petroleum liquid is compared to water. It is a critical parameter in classifying crude oil because it indicates the oil's density and, consequently, its quality and value. Crude oil with higher API gravity (above 10°) is lighter and typically more valuable because it yields more gasoline and lighter products upon refining. Conversely, crude oil with lower API gravity (below 10°) is heavier and yields more heavy products, requiring more complex refining processes."
-  },
-  {
-    "_id": "24107445-1159-42c9-b155-85c0bd51b8e8",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:46:41 GMT+0100 (West Africa Standard Time)",
-    "query": "What are gas hydrates, and why are they considered a potential future energy resource?",
-    "_updatedDate": "Sat May 25 2024 14:46:41 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Technical and environmental challenges for extraction",
-      "Potential future energy resource due to vast methane",
-      "Found in permafrost regions and beneath seabed",
-      "Predominantly methane trapped within the lattice",
-      "Crystalline solids with gas molecules in water ice"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Gas hydrates are crystalline solids in which gas molecules, predominantly methane, are trapped within a lattice of water ice. They are typically found in permafrost regions and beneath the seabed. Gas hydrates are considered a potential future energy resource due to the vast amounts of methane they contain, which could significantly supplement global energy supplies. However, their extraction poses technical and environmental challenges that need to be addressed before they can be commercially viable."
-  },
-  {
-    "_id": "d7f3d947-dee3-40c0-a94e-d167dc162f9b",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:48:43 GMT+0100 (West Africa Standard Time)",
-    "query": "Differentiate between conventional crude oil and heavy oil.",
-    "_updatedDate": "Sat May 25 2024 14:48:43 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Higher sulfur content and more extensive refining",
-      "Denser and more viscous requiring enhanced recovery",
-      "Flows readily at normal temperatures and pressures",
-      "Easier to extract, transport, and refine",
-      "Light and low in viscosity"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Conventional crude oil is typically light and low in viscosity, making it easier to extract, transport, and refine into various products like gasoline and diesel. It flows readily at normal temperatures and pressures. Heavy oil, on the other hand, is denser and more viscous, requiring enhanced recovery techniques such as thermal injection or dilution with lighter hydrocarbons to mobilize and extract it. Heavy oil also tends to have higher sulfur content and other impurities, necessitating more extensive refining processes."
-  },
-  {
-    "_id": "7a7a8a5f-9aa2-454f-be5d-0c2cbde1a6cd",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:51:04 GMT+0100 (West Africa Standard Time)",
-    "query": "What challenges are associated with offshore oil and gas exploration?",
-    "_updatedDate": "Sat May 25 2024 14:54:30 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Environmental concerns and potential oil spills",
-      "Risk of mechanical failures and accidents",
-      "Technical complexity of offshore platforms",
-      "Strong currents and severe weather complications",
-      "Harsh environmental conditions in deep water",
-      "High costs and logistical transportation issues"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Offshore oil and gas exploration faces several challenges, including harsh environmental conditions such as deep water, strong currents, and severe weather, which complicate drilling and production operations. The technical complexity of offshore platforms and subsea equipment increases the risk of mechanical failures and accidents. Additionally, environmental concerns, including the potential for oil spills and their impact on marine ecosystems, necessitate stringent safety and regulatory measures. High costs and logistical issues related to transporting personnel and materials to remote offshore locations also add to the challenges."
-  },
-  {
-    "_id": "9d102c4c-3ded-49c7-ab96-a64fb2b6a133",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:56:45 GMT+0100 (West Africa Standard Time)",
-    "query": "Describe the process and significance of oil migration.",
-    "_updatedDate": "Sat May 25 2024 14:56:45 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Effective migration and trapping for commercial reservoirs",
-      "Through permeable pathways to impermeable barriers",
-      "Driven by pressure difference and buoyancy",
-      "Determines location of economically viable deposits",
-      "Movement of hydrocarbons from source to reservoir rocks."
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Oil migration is the movement of hydrocarbons from their source rocks to reservoir rocks where they accumulate. This process is significant because it determines the location of economically viable oil deposits. Migration occurs due to the difference in pressure and buoyancy, driving the oil through permeable pathways until it is trapped by an impermeable barrier, such as a cap rock. Effective migration and trapping are crucial for the formation of oil reservoirs that can be exploited commercially."
-  },
-  {
-    "_id": "52465bc2-fcd6-4927-a1b6-ac3811b355a6",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 14:58:28 GMT+0100 (West Africa Standard Time)",
-    "query": "What is the role of cap rocks in oil accumulation?",
-    "_updatedDate": "Sat May 25 2024 14:58:28 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Low permeability and high sealing capacity",
-      "Common types include shale, salt, and anhydrite",
-      "Essential for forming substantial accumulations",
-      "Prevent upward migration, trapping hydrocarbons below",
-      "Act as impermeable barriers for hydrocarbon migration"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Cap rocks play a vital role in oil accumulation by acting as impermeable barriers that prevent the upward migration of hydrocarbons, thus trapping them in the reservoir rocks below. Without cap rocks, oil and gas would continue to migrate towards the surface and disperse, making it impossible to form substantial accumulations. Common types of cap rocks include shale, salt, and anhydrite, which have low permeability and high sealing capacity, ensuring the containment of hydrocarbons within the reservoir."
-  },
-  {
-    "_id": "92a490ab-dbb4-4e4a-a0bf-dc9ee5dced5a",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 15:00:29 GMT+0100 (West Africa Standard Time)",
-    "query": "Explain why high acid crudes require special processing equipment.",
-    "_updatedDate": "Sat May 25 2024 15:00:29 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Increased maintenance costs and safety hazards",
-      "Significant wear and tear on processing units and pipelines",
-      "Prevent damage and ensure safe operations",
-      "Require corrosion-resistant materials and handling procedures",
-      "Corrosive to standard refinery equipment",
-      "Contain elevated levels of corrosive naphthenic acids"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "High acid crudes contain elevated levels of naphthenic acids, which are corrosive to standard refinery equipment. To process these crudes, refineries must use corrosion-resistant materials and implement special handling procedures to prevent damage and ensure safe operations. These acids can cause significant wear and tear on processing units, pipelines, and storage tanks, leading to increased maintenance costs and potential safety hazards. Therefore, refineries need to invest in specialized equipment to handle high-acid crudes effectively."
-  },
-  {
-    "_id": "fb81c5eb-7ee9-4cf7-9b06-9add45411592",
-    "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
-    "_createdDate": "Sat May 25 2024 15:03:15 GMT+0100 (West Africa Standard Time)",
-    "query": "What are opportunity crudes, and what challenges do they present?",
-    "_updatedDate": "Sat May 25 2024 15:03:15 GMT+0100 (West Africa Standard Time)",
-    "keypoints": [
-      "Valuable for diversifying supply sources and energy security",
-      "Potential environmental issues from processing byproducts",
-      "Increased operational costs and advanced technology",
-      "Specific processing techniques and infrastructure modifications",
-      "High sulfur content, high acidity, or high metal concentrations",
-      "Non-conventional crude oils with diverse properties"
-    ],
-    "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
-    "ideal_response": "Opportunity crudes are non-conventional crude oils that often present unique challenges due to their diverse properties, such as high sulfur content, high acidity, or high metal concentrations. These crudes require specific processing techniques and infrastructure modifications to be refined effectively. The challenges include increased operational costs, the need for advanced technology, and potential environmental issues related to processing byproducts. Despite these challenges, opportunity crudes are valuable for diversifying supply sources and enhancing energy security."
-  }
-];
+            {
+                "_id": "205f8950-004b-4d1a-b635-8e6017959b49",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:39:28 GMT+0100 (West Africa Standard Time)",
+                "query": "What are the primary factors involved in the formation of crude oil according to the biogenic theory?",
+                "_updatedDate": "Sat May 25 2024 14:39:28 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Diagenesis, catagenesis, and metagenesis processes",
+                    "Transformed into hydrocarbons over millions of years",
+                    "Increasing depth, temperature, and pressure",
+                    "Buried under layers of sediment",
+                    "Remains of ancient marine organisms"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "The biogenic theory of crude oil formation posits that crude oil is formed from the remains of ancient marine organisms. These organisms, upon dying, settled on the seabed, becoming buried under layers of sediment. Over millions of years, with increasing depth, temperature, and pressure, these organic materials transformed into hydrocarbons. The process involves diagenesis (initial breakdown), catagenesis (thermal degradation), and metagenesis (formation of hydrocarbons)."
+            },
+            {
+                "_id": "6a4621da-7d8b-4aec-bacd-ce19e5d29e0a",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:41:00 GMT+0100 (West Africa Standard Time)",
+                "query": "Describe the role of reservoir rocks in the accumulation of crude oil.",
+                "_updatedDate": "Sat May 25 2024 14:41:00 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "High porosity and high permeability",
+                    "Encounters an impermeable barrier",
+                    "Migrates from source rock to reservoir rock",
+                    "Interconnected pores allow oil movement",
+                    "Porous and permeable medium for oil storage"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Reservoir rocks play a crucial role in the accumulation of crude oil by providing the porous and permeable medium necessary for oil storage and migration. These rocks have interconnected pores that allow oil to move through them. The oil migrates from the source rock into the reservoir rock until it encounters an impermeable barrier, such as a cap rock, where it accumulates. Key properties of reservoir rocks include high porosity, which allows for the storage of large volumes of oil, and high permeability, which enables the movement of oil through the rock."
+            },
+            {
+                "_id": "43bd5ebe-1412-4618-b688-13e99f578d56",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:44:43 GMT+0100 (West Africa Standard Time)",
+                "query": "Explain the significance of API gravity in classifying crude oil.",
+                "_updatedDate": "Sat May 25 2024 14:44:43 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Lower API gravity means heavier oil requiring complex refining",
+                    "Yields more gasoline and lighter products",
+                    "Higher API gravity means lighter and more valuable oil",
+                    "Indicates oil's density, quality, and value",
+                    "Measure of petroleum liquid density compared to water"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "API gravity is a measure of how heavy or light a petroleum liquid is compared to water. It is a critical parameter in classifying crude oil because it indicates the oil's density and, consequently, its quality and value. Crude oil with higher API gravity (above 10°) is lighter and typically more valuable because it yields more gasoline and lighter products upon refining. Conversely, crude oil with lower API gravity (below 10°) is heavier and yields more heavy products, requiring more complex refining processes."
+            },
+            {
+                "_id": "24107445-1159-42c9-b155-85c0bd51b8e8",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:46:41 GMT+0100 (West Africa Standard Time)",
+                "query": "What are gas hydrates, and why are they considered a potential future energy resource?",
+                "_updatedDate": "Sat May 25 2024 14:46:41 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Technical and environmental challenges for extraction",
+                    "Potential future energy resource due to vast methane",
+                    "Found in permafrost regions and beneath seabed",
+                    "Predominantly methane trapped within the lattice",
+                    "Crystalline solids with gas molecules in water ice"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Gas hydrates are crystalline solids in which gas molecules, predominantly methane, are trapped within a lattice of water ice. They are typically found in permafrost regions and beneath the seabed. Gas hydrates are considered a potential future energy resource due to the vast amounts of methane they contain, which could significantly supplement global energy supplies. However, their extraction poses technical and environmental challenges that need to be addressed before they can be commercially viable."
+            },
+            {
+                "_id": "d7f3d947-dee3-40c0-a94e-d167dc162f9b",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:48:43 GMT+0100 (West Africa Standard Time)",
+                "query": "Differentiate between conventional crude oil and heavy oil.",
+                "_updatedDate": "Sat May 25 2024 14:48:43 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Higher sulfur content and more extensive refining",
+                    "Denser and more viscous requiring enhanced recovery",
+                    "Flows readily at normal temperatures and pressures",
+                    "Easier to extract, transport, and refine",
+                    "Light and low in viscosity"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Conventional crude oil is typically light and low in viscosity, making it easier to extract, transport, and refine into various products like gasoline and diesel. It flows readily at normal temperatures and pressures. Heavy oil, on the other hand, is denser and more viscous, requiring enhanced recovery techniques such as thermal injection or dilution with lighter hydrocarbons to mobilize and extract it. Heavy oil also tends to have higher sulfur content and other impurities, necessitating more extensive refining processes."
+            },
+            {
+                "_id": "7a7a8a5f-9aa2-454f-be5d-0c2cbde1a6cd",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:51:04 GMT+0100 (West Africa Standard Time)",
+                "query": "What challenges are associated with offshore oil and gas exploration?",
+                "_updatedDate": "Sat May 25 2024 14:54:30 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Environmental concerns and potential oil spills",
+                    "Risk of mechanical failures and accidents",
+                    "Technical complexity of offshore platforms",
+                    "Strong currents and severe weather complications",
+                    "Harsh environmental conditions in deep water",
+                    "High costs and logistical transportation issues"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Offshore oil and gas exploration faces several challenges, including harsh environmental conditions such as deep water, strong currents, and severe weather, which complicate drilling and production operations. The technical complexity of offshore platforms and subsea equipment increases the risk of mechanical failures and accidents. Additionally, environmental concerns, including the potential for oil spills and their impact on marine ecosystems, necessitate stringent safety and regulatory measures. High costs and logistical issues related to transporting personnel and materials to remote offshore locations also add to the challenges."
+            },
+            {
+                "_id": "9d102c4c-3ded-49c7-ab96-a64fb2b6a133",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:56:45 GMT+0100 (West Africa Standard Time)",
+                "query": "Describe the process and significance of oil migration.",
+                "_updatedDate": "Sat May 25 2024 14:56:45 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Effective migration and trapping for commercial reservoirs",
+                    "Through permeable pathways to impermeable barriers",
+                    "Driven by pressure difference and buoyancy",
+                    "Determines location of economically viable deposits",
+                    "Movement of hydrocarbons from source to reservoir rocks."
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Oil migration is the movement of hydrocarbons from their source rocks to reservoir rocks where they accumulate. This process is significant because it determines the location of economically viable oil deposits. Migration occurs due to the difference in pressure and buoyancy, driving the oil through permeable pathways until it is trapped by an impermeable barrier, such as a cap rock. Effective migration and trapping are crucial for the formation of oil reservoirs that can be exploited commercially."
+            },
+            {
+                "_id": "52465bc2-fcd6-4927-a1b6-ac3811b355a6",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 14:58:28 GMT+0100 (West Africa Standard Time)",
+                "query": "What is the role of cap rocks in oil accumulation?",
+                "_updatedDate": "Sat May 25 2024 14:58:28 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Low permeability and high sealing capacity",
+                    "Common types include shale, salt, and anhydrite",
+                    "Essential for forming substantial accumulations",
+                    "Prevent upward migration, trapping hydrocarbons below",
+                    "Act as impermeable barriers for hydrocarbon migration"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Cap rocks play a vital role in oil accumulation by acting as impermeable barriers that prevent the upward migration of hydrocarbons, thus trapping them in the reservoir rocks below. Without cap rocks, oil and gas would continue to migrate towards the surface and disperse, making it impossible to form substantial accumulations. Common types of cap rocks include shale, salt, and anhydrite, which have low permeability and high sealing capacity, ensuring the containment of hydrocarbons within the reservoir."
+            },
+            {
+                "_id": "92a490ab-dbb4-4e4a-a0bf-dc9ee5dced5a",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 15:00:29 GMT+0100 (West Africa Standard Time)",
+                "query": "Explain why high acid crudes require special processing equipment.",
+                "_updatedDate": "Sat May 25 2024 15:00:29 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Increased maintenance costs and safety hazards",
+                    "Significant wear and tear on processing units and pipelines",
+                    "Prevent damage and ensure safe operations",
+                    "Require corrosion-resistant materials and handling procedures",
+                    "Corrosive to standard refinery equipment",
+                    "Contain elevated levels of corrosive naphthenic acids"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "High acid crudes contain elevated levels of naphthenic acids, which are corrosive to standard refinery equipment. To process these crudes, refineries must use corrosion-resistant materials and implement special handling procedures to prevent damage and ensure safe operations. These acids can cause significant wear and tear on processing units, pipelines, and storage tanks, leading to increased maintenance costs and potential safety hazards. Therefore, refineries need to invest in specialized equipment to handle high-acid crudes effectively."
+            },
+            {
+                "_id": "fb81c5eb-7ee9-4cf7-9b06-9add45411592",
+                "_owner": "4a021a1e-3b33-4649-80c8-d5ef1db5c8e4",
+                "_createdDate": "Sat May 25 2024 15:03:15 GMT+0100 (West Africa Standard Time)",
+                "query": "What are opportunity crudes, and what challenges do they present?",
+                "_updatedDate": "Sat May 25 2024 15:03:15 GMT+0100 (West Africa Standard Time)",
+                "keypoints": [
+                    "Valuable for diversifying supply sources and energy security",
+                    "Potential environmental issues from processing byproducts",
+                    "Increased operational costs and advanced technology",
+                    "Specific processing techniques and infrastructure modifications",
+                    "High sulfur content, high acidity, or high metal concentrations",
+                    "Non-conventional crude oils with diverse properties"
+                ],
+                "test_id": "2974733c-ce33-4eda-9da6-88f07b44c335",
+                "ideal_response": "Opportunity crudes are non-conventional crude oils that often present unique challenges due to their diverse properties, such as high sulfur content, high acidity, or high metal concentrations. These crudes require specific processing techniques and infrastructure modifications to be refined effectively. The challenges include increased operational costs, the need for advanced technology, and potential environmental issues related to processing byproducts. Despite these challenges, opportunity crudes are valuable for diversifying supply sources and enhancing energy security."
+            }
+        ];
 
         function init() {
             let changelog = true;
@@ -555,14 +555,28 @@
             // console.log("v1.0.11");
             // addLayout(test_data, changelog);
             window.onmessage = (event) => {
-                if(event.data) {
+                if (event.data) {
                     origin = event.origin;
+                    openFullscreen();
                     addLayout(event.data, changelog);
                 }
             }
 
             // window.parent.postMessage(test_data, window.location.origin);
         }
+
+        function openFullscreen() {
+            const elem = document.documentElement; // or use any specific element like document.getElementById("myDiv")
+
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { // Safari
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { // IE11
+                elem.msRequestFullscreen();
+            }
+        }
+
     </script>
 </body>
 
