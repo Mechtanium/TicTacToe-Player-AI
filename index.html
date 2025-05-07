@@ -160,13 +160,14 @@
             <input class="form-input" type="email" id="email" name="email">
         </div>
         <div id="container" class="container"></div>
-        <button class="submit-button" onclick="handleFormSubmit('COMPLETE')" id="submit-button">Submit all & Close test</button>
+        <button class="submit-button" onclick="handleFormSubmit('COMPLETE')" id="submit-button">Submit all & Close
+            test</button>
     </div>
 
     <div class="overlay" id="customAlertOverlay">
         <div class="alert-box">
             <div class="alert-message" id="alertMessage">Message goes here</div>
-            
+
             <div class="alert-buttons">
                 <button class="alert-button confirm" id="confirm">Confirm</button>
                 <button class="alert-button cancel" id="cancel">Cancel</button>
@@ -258,7 +259,7 @@
                 }
             });
 
-            data.forEach((item, idx, val) => {
+            shuffleArray(data).forEach((item, idx, val) => {
 
                 const clone = template.content.cloneNode(true);
                 clone.id = item._id;
@@ -562,6 +563,16 @@
             } else if (elem.msRequestFullscreen) { // IE11
                 elem.msRequestFullscreen();
             }
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                // Pick a random index from 0 to i
+                const j = Math.floor(Math.random() * (i + 1));
+                // Swap elements array[i] and array[j]
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
         }
 
     </script>
